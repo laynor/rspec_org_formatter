@@ -1,1 +1,1 @@
-gem 'rspec', ">= 0"
+gem 'rspec', ">= 2.0"

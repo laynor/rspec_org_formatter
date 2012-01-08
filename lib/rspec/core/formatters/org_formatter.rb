@@ -92,6 +92,15 @@ module RSpec
           @output.puts "#{section_indent example} :END:"
         end
 
+        def exception_pending_fixed?(exception)
+          if exception.respond_to? :pending_fixed?
+            exception.pending_fixed?
+          else
+            RSpec::Core::PendingExampleFixedError === exception
+          end
+        end
+            
+
         public
         def message(message)
         end
@@ -111,9 +120,6 @@ module RSpec
         end
 
         def start_dump
-          @output.puts "  </dl>"
-          @output.puts "</div>"
-          @output.flush
         end
 
         def example_passed(example)
@@ -127,7 +133,7 @@ module RSpec
         def example_failed(example)
           super(example)
           exception = example.metadata[:execution_result][:exception]
-          failure_style = RSpec::Core::PendingExampleFixedError === exception ? 'pending_fixed' : 'failed'
+          failure_style =  exception_pending_fixed?(exception) ? 'pending_fixed' : 'failed'
           # @header_red = true
           # @example_group_red = true
           @output.puts "#{section_markup example} #{failure_style.upcase} #{example.description}"
