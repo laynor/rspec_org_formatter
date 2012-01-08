@@ -1,4 +1,4 @@
-Gem::specification.new do |s|
+Gem::Specification.new do |s|
   s.name = 'rspec_org_formatter'
   s.version = '0.1.0'
   s.date = '2012-01-07'
