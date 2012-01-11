@@ -31,3 +31,4 @@ The MIT License, see [LICENSE][license].
   [bundler]: http://gembundler.com/
   [license]: https://github.com/sj26/rspec-junit-formatter/blob/master/LICENSE
   [orgmode]: http://orgmode.org/
+  [emacs]: http://www.gnu.org/software/emacs/
