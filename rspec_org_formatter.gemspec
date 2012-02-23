@@ -1,6 +1,6 @@
 Gem::Specification.new do |s|
   s.name = 'rspec_org_formatter'
-  s.version = '0.1.0'
+  s.version = '0.2.0'
   s.date = '2012-01-07'
   s.summary = "RSpec Org Formatter"
   s.description = "RSpec results meant to be viewed in an emacs org buffer"

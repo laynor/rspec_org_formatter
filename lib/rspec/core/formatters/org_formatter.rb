@@ -1,6 +1,12 @@
 require 'erb'
 require 'rspec/core/formatters/base_text_formatter'
 
+class String
+  def blank?
+    !self.match(/\A\s+\z/).nil?
+  end
+end
+    
 module RSpec
   module Core
     module Formatters
