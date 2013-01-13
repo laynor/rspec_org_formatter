@@ -6,7 +6,7 @@ class String
     !self.match(/\A\s+\z/).nil?
   end
 end
-    
+
 module RSpec
   module Core
     module Formatters
@@ -14,6 +14,7 @@ module RSpec
 
         def initialize(output)
           super(output)
+          @group_level = 1
         end
 
         private
@@ -22,11 +23,12 @@ module RSpec
         end
         protected
         def section_level(example_or_group)
-          if example_or_group.respond_to? :ancestors 
-            example_or_group.ancestors.size
-          else
-             example_or_group.example_group.ancestors.size + 1
-          end
+          # if example_or_group.respond_to? :ancestors
+          #   example_or_group.ancestors.size
+          # else
+          #   example_or_group.example_group.ancestors.size + 1
+          # end
+          @group_level
         end
         # returs a string containing the right amount of * for an org section title
         # relative to an example or example_group
@@ -43,7 +45,7 @@ module RSpec
         # returns the first line of the exception message text
         def exception_message_head (exception)
           nl = exception.message.index(?\n)
-          if nl 
+          if nl
             exception.message.slice(0, nl)
           else
             exception.message
@@ -59,7 +61,7 @@ module RSpec
             nil
           end
         end
-        
+
         # outputs an exception
         def output_exception(exception, example)
           @output.puts "#{section_indent example} #{exception_message_head exception}" unless exception.nil?
@@ -79,9 +81,9 @@ module RSpec
         # outputs the backtrace of an exception
         def output_backtrace(exception, example)
           if (exception)
-            @output.puts "#{section_indent example} *Backtrace*" 
+            @output.puts "#{section_indent example} *Backtrace*"
             fmtbktr = format_backtrace exception.backtrace, example
-            fmtbktr.each { |bktr| 
+            fmtbktr.each { |bktr|
               file, line, rest = bktr.match(/(.*):(.*):(in.*)/).to_a.drop(1)
               if file.index('./') == 0
                 file = file[1..-1]
@@ -105,7 +107,7 @@ module RSpec
             RSpec::Core::PendingExampleFixedError === exception
           end
         end
-            
+
 
         public
         def message(message)
@@ -123,8 +125,13 @@ module RSpec
           super(example_group)
           @output.puts "#{section_markup example_group} #{example_group.description}"
           @output.flush
+          @group_level += 1
         end
 
+        def example_group_finished(example_group)
+          super(example_group)
+          @group_level -= 1
+        end
         def start_dump
         end
 
@@ -135,7 +142,7 @@ module RSpec
 
 
 
-          
+
         def example_failed(example)
           super(example)
           exception = example.metadata[:execution_result][:exception]
@@ -183,7 +190,7 @@ module RSpec
           @output.puts "#+TODO: FAILED PENDING_FIXED PENDING | SUCCESS"
           @output.flush
         end
-        
+
       end
     end
   end
