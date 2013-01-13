@@ -1,4 +1,3 @@
-require 'builder'
 require 'rspec'
 
 require 'rspec/core/formatters/base_formatter'
