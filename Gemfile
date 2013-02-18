@@ -1,1 +1,3 @@
-gem 'rspec', ">= 2.0"
+source :rubygems
+gemspec
+

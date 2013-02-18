@@ -1,6 +1,12 @@
 require 'erb'
 require 'rspec/core/formatters/base_text_formatter'
 
+class NilClass
+  def blank?
+    true
+  end
+end
+
 class String
   def blank?
     !self.match(/\A\s+\z/).nil?
