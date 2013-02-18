@@ -10,7 +10,7 @@ Install the gem:
 
 Use it:
 
-    rspec --fRspecOrgFormatter --out rspec.org
+    rspec -f RspecOrgFormatter --out rspec.org
 
 You'll get an org file with your results in it.
 
@@ -20,8 +20,9 @@ Add it to your Gemfile if you're using [Bundler][bundler].
 
 In your .rspec, usually alongside another formatter, add:
 
-    --format RspecOrgFormatter
+    -f RspecOrgFormatter
     --out rspec.org
+
 
 ## License
 
