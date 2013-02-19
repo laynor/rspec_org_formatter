@@ -1,0 +1,28 @@
+PATH
+  remote: .
+  specs:
+    rspec_org_formatter (0.2.3)
+      rspec (>= 2.6.0)
+
+GEM
+  remote: http://rubygems.org/
+  specs:
+    diff-lcs (1.1.3)
+    rake (0.9.6)
+    rspec (2.12.0)
+      rspec-core (~> 2.12.0)
+      rspec-expectations (~> 2.12.0)
+      rspec-mocks (~> 2.12.0)
+    rspec-core (2.12.2)
+    rspec-expectations (2.12.1)
+      diff-lcs (~> 1.1.3)
+    rspec-mocks (2.12.2)
+
+PLATFORMS
+  ruby
+
+DEPENDENCIES
+  bundler (~> 1.0)
+  rake (~> 0.8)
+  rspec (~> 2.4)
+  rspec_org_formatter!
