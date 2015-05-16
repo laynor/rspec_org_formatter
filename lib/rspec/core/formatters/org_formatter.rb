@@ -1,18 +1,6 @@
 require 'erb'
 require 'rspec/core/formatters/base_text_formatter'
 
-class NilClass
-  def blank?
-    true
-  end
-end
-
-class String
-  def blank?
-    !self.match(/\A\s+\z/).nil?
-  end
-end
-
 module RSpec
   module Core
     module Formatters
@@ -72,7 +60,7 @@ module RSpec
         def output_exception(exception, example)
           @output.puts "#{section_indent example} #{exception_message_head exception}" unless exception.nil?
           exception_msg_body = exception_message_body exception
-          if !(exception_msg_body.blank?)
+          if exception_msg_body && exception_msg_body =~ /\S/
             exception_msg_body = (exception_msg_body.strip.split("\n").map! { |line| "#{section_indent example}   #{line}" }).join("\n").chomp
             @output.puts "#{section_indent example} :DETAILS:"
             @output.puts exception_msg_body
